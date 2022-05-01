@@ -46,7 +46,7 @@ func getUserIdShoppingCart(r *http.Request) int {
 	vars := mux.Vars(r)
 
 	// convert the id into an integer and return
-	id, err := strconv.Atoi(vars["id"])
+	id, err := strconv.Atoi(vars["userid"])
 	if err != nil {
 		// should never happen
 		panic(err)
