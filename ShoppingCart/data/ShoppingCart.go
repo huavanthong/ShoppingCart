@@ -35,7 +35,7 @@ func (s *ShoppingCart) DeleteItems(pId int) {
 type ShoppingCartItem struct {
 	ProductCatalogueId int
 	ProductName        string
-	Desscription       string
+	Description        string
 	Price              Money
 }
 
@@ -43,7 +43,7 @@ func NewShoppingCartItem(item ShoppingCartItem) *ShoppingCartItem {
 	return &ShoppingCartItem{
 		ProductCatalogueId: item.ProductCatalogueId,
 		ProductName:        item.ProductName,
-		Desscription:       item.Desscription,
+		Description:        item.Description,
 		Price:              item.Price,
 	}
 }

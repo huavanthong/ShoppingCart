@@ -1,4 +1,4 @@
-package c
+package handlers
 
 import (
 	"fmt"
@@ -20,7 +20,7 @@ type ShoppingCarts struct {
 }
 
 // NewShoppingCarts return a new shopping cart handler with the given logger
-func NewShoppingCarts(l *log.Logger, v *data.Validation) *Products {
+func NewShoppingCarts(l *log.Logger, v *data.Validation) *ShoppingCarts {
 	return &ShoppingCarts{l, v}
 }
 

@@ -7,6 +7,8 @@ import (
 
 	"github.com/gorilla/mux"
 	"github.com/huavanthong/ShoppingCart/ShoppingCart/data"
+	"github.com/huavanthong/ShoppingCart/ShoppingCart/handlers"
+
 	"github.com/nicholasjackson/env"
 )
 
@@ -22,14 +24,14 @@ func main() {
 	v := data.NewValidation()
 
 	// create the handlers
-	eh := handlers.NewShoppingCarts(l, v)
+	sch := handlers.NewShoppingCarts(l, v)
 
 	// create a new server mux and register the handlers
 	sm := mux.NewRouter()
 
 	// handlers for API
 	getR := sm.Methods(http.MethodGet).Subrouter()
-	getR.HandleFunc("/shoppingcart", ph.ListAll)
-	getR.HandleFunc("/shoppingcart/{userid:[0-9]+}", ph.ListSingle)
+	getR.HandleFunc("/shoppingcart", sch.ListAll)
+	getR.HandleFunc("/shoppingcart/{userid:[0-9]+}", sch.ListSingle)
 
 }
