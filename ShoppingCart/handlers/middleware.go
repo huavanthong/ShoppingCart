@@ -4,7 +4,7 @@ import (
 	"context"
 	"net/http"
 
-	"module github.com/huavanthong/ShoppingCart/ShoppingCart/data"
+	"github.com/huavanthong/ShoppingCart/ShoppingCart/data"
 )
 
 func (s *Products) MiddlewareValidateShoppingCart(next http.Handler) http.Handler {
