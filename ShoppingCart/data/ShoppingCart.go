@@ -1,12 +1,15 @@
-package ShoppingCart
+package data
 
 import "fmt"
 
+/************************ Define error code ************************/
 var ErrItemNotFound = fmt.Errorf("Item in ShoppingCart not found")
+var UserIdForShoppingCartNotFound = fmt.Errorf("User in ShoppingCart not found")
 
+/************************ Define structure shopping cart ************************/
 type ShoppingCart struct {
 	UserId int
-	items  []ShoppingCartItem
+	Items  []ShoppingCartItem
 }
 
 func UserShoppingCart(userID int) *ShoppingCart {
@@ -28,6 +31,7 @@ func (s *ShoppingCart) DeleteItems(pId int) {
 	}
 }
 
+/************************ Define structure shopping cart item ************************/
 type ShoppingCartItem struct {
 	ProductCatalogueId int
 	ProductName        string
@@ -44,6 +48,7 @@ func NewShoppingCartItem(item ShoppingCartItem) *ShoppingCartItem {
 	}
 }
 
+/************************ Define structure money ************************/
 type Money struct {
 	Currency string
 	Amount   float64
