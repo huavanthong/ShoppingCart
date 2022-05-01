@@ -6,10 +6,10 @@ import (
 )
 
 // ToJSON serialize the given interface into a string based JSON format
-func ToJSON(i interface{}, w io.writer) error {
+func ToJSON(i interface{}, w io.Writer) error {
 	e := json.NewEncoder(w)
 
-	return e.Encode(I)
+	return e.Encode(i)
 }
 
 // FromJSON deserialize the object from JSON string

@@ -7,14 +7,14 @@ import (
 	"github.com/huavanthong/ShoppingCart/ShoppingCart/data"
 )
 
-func (s *Products) MiddlewareValidateShoppingCart(next http.Handler) http.Handler {
-	return http.HandlerFunc(func(rw http.ResponseWriter, r *http.Request)) {
+func (s *ShoppingCarts) MiddlewareValidateShoppingCart(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(rw http.ResponseWriter, r *http.Request) {
 
 		shoppingCart := &data.ShoppingCart{}
 
-		err := data.FromJSON(prod, r.Body)
+		err := data.FromJSON(shoppingCart, r.Body)
 		if err != nil {
-			p.l.Println("[ERROR] deserializing product", err)
+			s.l.Println("[ERROR] deserializing shopping cart", err)
 
 			rw.WriteHeader(http.StatusBadRequest)
 			data.ToJSON(&GenericError{Message: err.Error()}, rw)
@@ -22,9 +22,9 @@ func (s *Products) MiddlewareValidateShoppingCart(next http.Handler) http.Handle
 		}
 
 		// validate the product
-		errs := p.v.Validate(shoppingCart)
+		errs := s.v.Validate(shoppingCart)
 		if len(errs) != 0 {
-			p.l.Println("[ERROR] validating product", errs)
+			s.l.Println("[ERROR] validating shopping cart", errs)
 
 			// return the validation messages as an array
 			rw.WriteHeader(http.StatusUnprocessableEntity)
@@ -33,10 +33,10 @@ func (s *Products) MiddlewareValidateShoppingCart(next http.Handler) http.Handle
 		}
 
 		// add the product to the context
-		ctx := context.WithValue(r.Context(), KeyProduct{}, prod)
+		ctx := context.WithValue(r.Context(), KeyShoppingCart{}, shoppingCart)
 		r = r.WithContext(ctx)
 
 		// Call the next handler, which can be another middleware in the chain, or the final handler.
 		next.ServeHTTP(rw, r)
-	}
+	})
 }
