@@ -8,8 +8,8 @@ var UserIdForShoppingCartNotFound = fmt.Errorf("User in ShoppingCart not found")
 
 /************************ Define structure shopping cart ************************/
 type ShoppingCart struct {
-	UserId int
-	Items  []ShoppingCartItem
+	UserId int                `json:"userid"`
+	Items  []ShoppingCartItem `json:"shoppingcartitem"`
 }
 
 func UserShoppingCart(userID int) *ShoppingCart {
@@ -18,25 +18,25 @@ func UserShoppingCart(userID int) *ShoppingCart {
 	}
 }
 
-func (s *ShoppingCart) AddItems(item ShoppingCartItem) {
-	(*s).items = append((*s).items, item)
-}
+// func (s *ShoppingCart) AddItems(item ShoppingCartItem) {
+// 	(*s).items = append((*s).items, item)
+// }
 
-func (s *ShoppingCart) DeleteItems(pId int) {
+// func (s *ShoppingCart) DeleteItems(pId int) {
 
-	for i, p := range (*s).items {
-		if p.ProductCatalogueId == pId {
-			(*s).items = append((*s).items[:i], (*s).items[i+1])
-		}
-	}
-}
+// 	for i, p := range (*s).items {
+// 		if p.ProductCatalogueId == pId {
+// 			(*s).items = append((*s).items[:i], (*s).items[i+1])
+// 		}
+// 	}
+// }
 
 /************************ Define structure shopping cart item ************************/
 type ShoppingCartItem struct {
-	ProductCatalogueId int
-	ProductName        string
-	Description        string
-	Price              Money
+	ProductCatalogueId int    `json:"productcatalogueid"`
+	ProductName        string `json:"productname"`
+	Description        string `json:"description"`
+	Price              Money  `json:"money"`
 }
 
 func NewShoppingCartItem(item ShoppingCartItem) *ShoppingCartItem {
@@ -50,8 +50,8 @@ func NewShoppingCartItem(item ShoppingCartItem) *ShoppingCartItem {
 
 /************************ Define structure money ************************/
 type Money struct {
-	Currency string
-	Amount   float64
+	Currency string  `json:"currency"`
+	Amount   float64 `json:"amount"`
 }
 
 func NewMoney(currency string, amount float64) *Money {
